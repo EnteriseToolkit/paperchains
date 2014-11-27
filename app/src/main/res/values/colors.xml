@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="primary">#8bc34a</color>
+	<color name="primary_dark">#7cb342</color>
+	<color name="accent">#ff9100</color>
+	<color name="background">#37474f</color>
+
+	<color name="record_button">@color/accent</color>
+	<color name="play_button">#2196f3</color>
+	<color name="delete_button">#f44336</color>
+	<color name="save_button">@color/primary</color>
+
+	<color name="audio_area">@color/accent</color>
+	<color name="scribble">@color/accent</color>
+</resources>

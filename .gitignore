@@ -1,0 +1,12 @@
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/.idea/dictionaries
+.DS_Store
+/build
+
+/versions
+
+# you will need to provide your own SoundCloud client id and secret
+app/src/main/res/values/soundcloud.xml

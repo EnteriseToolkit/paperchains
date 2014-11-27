@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<declare-styleable name="AudioRecorderCircleButton">
+		<attr name="cb_pressedColor" format="color"/>
+		<attr name="cb_recordingColor" format="color"/>
+		<attr name="cb_pressedRingWidth" format="dimension"/>
+		<attr name="cb_recordingRingWidth" format="dimension"/>
+	</declare-styleable>
+
+	<string name="pref_soundcloud_access_token">soundcloud_access_token</string>
+
+	<dimen name="scribble_stroke_width">30dp</dimen>
+</resources>

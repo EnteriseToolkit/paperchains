@@ -1,0 +1,31 @@
+<resources>
+	<string name="app_name">PaperChains</string>
+	<string name="title_activity_capture">Frame two QR codes</string>
+	<string name="title_activity_explore">Touch to listen</string>
+	<string name="title_activity_image_only">No audio available</string>
+	<string name="title_activity_add">Scribble to add audio</string>
+	<string name="title_activity_record">Record your audio</string>
+	<string name="title_activity_soundcloud_login">Log in to SoundCloud</string>
+
+	<string name="menu_add_audio">Add audio</string>
+	<string name="menu_listen">Listen to audio</string>
+	<string name="menu_rescan">Rescan</string>
+
+	<string name="hint_no_camera">Sorry, no camera was found - a camera is required for this app</string>
+	<string name="hint_json_error">Sorry, encountered a page error - maybe this isn\'t an audio document?</string>
+	<string name="hint_connection_error">Connection error - is there an internet connection available?</string>
+	<string name="hint_soundcloud_load_too_early">This track has not yet been processed by SoundCloud, or has been deleted - please try again in a moment</string>
+	<string name="hint_soundcloud_load_failed">Sorry, unable to load the audio - is there an internet connection available?</string>
+	<string name="hint_audio_save_failed">Sorry, unable to update the audio - is there an internet connection available?</string>
+
+	<string name="audio_upload_title">Audio upload</string>
+	<string name="audio_upload_progress">Uploading your recording</string>
+	<string name="audio_upload_file_title">PaperChains audio recording</string>
+	<string name="audio_upload_file_description">This audio recording is part of a PaperChains document. Find out more at http://www.enterise.info/paperchains</string>
+	<string name="audio_upload_completed">Upload complete</string>
+	<string name="audio_upload_failed">Upload failed</string>
+
+	<string name="soundcloud_login_failed">Unable to log in to SoundCloud - please try again</string>
+	<string name="audio_recording_setup_error">Unable to set up audio recording. Please try again</string>
+	<string name="audio_recording_pause_error">Unable to pause recording. Please try again</string>
+</resources>

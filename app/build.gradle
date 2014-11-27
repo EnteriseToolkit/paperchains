@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion '21.1.1'
+
+    defaultConfig {
+        applicationId 'ac.robinson.paperchains'
+        minSdkVersion 8
+        targetSdkVersion 21
+        versionCode 1
+        versionName '1.0'
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    packagingOptions {
+        // fix duplicate license/notice conflicts (apache http core/mime)
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+}
+
+dependencies {
+    compile project(':..:dualqrscanner:app')
+    compile files('libs/java-api-wrapper-1.0.1-SNAPSHOT.jar') // TODO: using old version for upload as new one fails...
+
+    compile 'com.android.support:appcompat-v7:21.0.0'
+    compile 'com.googlecode.mp4parser:isoparser:1.0.2'
+    compile 'com.loopj.android:android-async-http:1.4.6'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile ('org.apache.httpcomponents:httpmime:4.0.3') { // TODO: specific (older) version required for SoundCloud
+        exclude module: 'commons-logging'
+        exclude module: 'httpclient'
+    }
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools">
+
+	<item
+		android:id="@+id/action_add_audio"
+		android:icon="@drawable/ic_add_white_24dp"
+		android:showAsAction="ifRoom|withText"
+		android:title="@string/menu_add_audio"
+		app:showAsAction="ifRoom|withText"
+		tools:ignore="AppCompatResource,UnusedAttribute"/>
+
+	<item
+		android:id="@+id/action_listen"
+		android:icon="@drawable/ic_volume_up_white_24dp"
+		android:showAsAction="ifRoom|withText"
+		android:title="@string/menu_listen"
+		app:showAsAction="ifRoom|withText"
+		tools:ignore="AppCompatResource,UnusedAttribute"/>
+
+	<item
+		android:id="@+id/action_rescan"
+		android:showAsAction="never"
+		android:title="@string/menu_rescan"
+		app:showAsAction="never"
+		tools:ignore="AppCompatResource,UnusedAttribute"/>
+
+</menu>

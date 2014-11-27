@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/background">
+
+	<SurfaceView
+		android:id="@+id/preview_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:keepScreenOn="true"/>
+
+	<ac.robinson.dualqrscanner.ViewfinderView
+		android:id="@+id/viewfinder_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"/>
+
+	<ac.robinson.paperchains.PaperChainsView
+		android:id="@+id/image_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_marginTop="?attr/actionBarSize"
+		android:visibility="invisible"/>
+	<!-- must be invisible (rather than gone) as we need its dimensions -->
+
+	<ac.robinson.paperchains.AudioRecorderCircleButton
+		android:id="@+id/record_button"
+		android:layout_width="136dp"
+		android:layout_height="136dp"
+		android:layout_alignParentBottom="true"
+		android:src="@drawable/ic_mic_white_24dp"
+		android:visibility="invisible"
+		app:cb_pressedColor="@color/record_button"
+		app:cb_pressedRingWidth="4dp"
+		app:cb_recordingColor="#cccccc"
+		app:cb_recordingRingWidth="40dp"/>
+	<!-- must be invisible (rather than gone) as we need its dimensions -->
+
+	<ac.robinson.paperchains.AudioRecorderCircleButton
+		android:id="@+id/play_button"
+		android:layout_width="64dp"
+		android:layout_height="64dp"
+		android:layout_alignParentBottom="true"
+		android:src="@drawable/ic_play_arrow_white_24dp"
+		android:visibility="invisible"
+		app:cb_pressedColor="@color/play_button"
+		app:cb_pressedRingWidth="4dp"/>
+	<!-- must be invisible (rather than gone) as we need its dimensions -->
+
+	<ac.robinson.paperchains.AudioRecorderCircleButton
+		android:id="@+id/delete_button"
+		android:layout_width="64dp"
+		android:layout_height="64dp"
+		android:layout_alignParentBottom="true"
+		android:src="@drawable/ic_clear_white_24dp"
+		android:visibility="invisible"
+		app:cb_pressedColor="@color/delete_button"
+		app:cb_pressedRingWidth="4dp"/>
+
+	<ac.robinson.paperchains.AudioRecorderCircleButton
+		android:id="@+id/save_button"
+		android:layout_width="64dp"
+		android:layout_height="64dp"
+		android:layout_alignParentBottom="true"
+		android:src="@drawable/ic_done_white_24dp"
+		android:visibility="invisible"
+		app:cb_pressedColor="@color/save_button"
+		app:cb_pressedRingWidth="4dp"/>
+
+</RelativeLayout>
