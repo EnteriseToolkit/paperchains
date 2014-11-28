@@ -410,11 +410,13 @@ public class PaperChainsActivity extends DecoderActivity {
 
 	private void addAudioRects() {
 		for (AudioAreaHolder holder : mAudioAreas) {
-			// convert grid-based coordinates to image-based coordinates
+			// convert grid-based coordinates to image-based coordinates, accounting for image rotation/inversion by
+			// making sure to use the min/max values of each coordinate
 			Rect rect = holder.serverRect;
 			PointF leftTop = QRImageParser.getImagePosition(mImageParameters, new PointF(rect.left, rect.top));
 			PointF rightBottom = QRImageParser.getImagePosition(mImageParameters, new PointF(rect.right, rect.bottom));
-			RectF displayRect = new RectF(leftTop.x, leftTop.y, rightBottom.x, rightBottom.y);
+			RectF displayRect = new RectF(Math.min(leftTop.x, rightBottom.x), Math.min(leftTop.y, rightBottom.y),
+					Math.max(rightBottom.x, leftTop.x), Math.max(leftTop.y, rightBottom.y));
 			Rect imageRect = new Rect();
 			displayRect.roundOut(imageRect);
 
@@ -617,10 +619,14 @@ public class PaperChainsActivity extends DecoderActivity {
 			startActivityForResult(new Intent(PaperChainsActivity.this, SoundCloudLoginActivity.class),
 					SOUNDCLOUD_LOGIN_RESULT);
 		} else {
-			// TODO: there's a glitchy graphics issue here - animation freezes while both are setup
-			mSaveButton.setImageResource(R.drawable.ic_refresh_white_24dp);
-			mSaveButton.startAnimation(mRotateAnimation);
 			animateRecordingInterface(-1, mSaveButton); // -1 = animate in
+			new Handler().postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					mSaveButton.setImageResource(R.drawable.ic_refresh_white_24dp);
+					mSaveButton.startAnimation(mRotateAnimation);
+				}
+			}, BUTTON_ANIMATION_DURATION); // delayed so that the rotation doesn't interfere with the inwards animation
 
 			new SoundCloudUploadTask(PaperChainsActivity.this, sSoundCloudUploaderApiWrapper, new Token(accessToken,
 					null, Token.SCOPE_NON_EXPIRING), mPageId, new Rect(mCurrentAudioRect)).execute(mAudioRecorder
@@ -644,16 +650,21 @@ public class PaperChainsActivity extends DecoderActivity {
 		final PointF rectRightBottom = QRImageParser.getGridPosition(mImageParameters, new PointF(audioRect.right,
 				audioRect.bottom));
 
-		final int left = Math.round(rectLeftTop.x);
-		final int top = Math.round(rectLeftTop.y);
-		final int right = Math.round(rectRightBottom.x);
-		final int bottom = Math.round(rectRightBottom.y);
+		// account for image rotation/inversion by making sure to use the min/max values of each coordinate
+		int left = Math.round(rectLeftTop.x);
+		int top = Math.round(rectLeftTop.y);
+		int right = Math.round(rectRightBottom.x);
+		int bottom = Math.round(rectRightBottom.y);
+		final int leftmost = Math.min(left, right);
+		final int topmost = Math.min(top, bottom);
+		final int rightmost = Math.max(left, right);
+		final int bottommost = Math.max(top, bottom);
 
 		RequestParams params = new RequestParams("newaudio", 1); // 1 reserved for possible future use as box ID
-		params.put("left", left);
-		params.put("top", top);
-		params.put("right", right);
-		params.put("bottom", bottom);
+		params.put("left", leftmost);
+		params.put("top", topmost);
+		params.put("right", rightmost);
+		params.put("bottom", bottommost);
 		params.put("soundCloudId", trackId);
 		params.put("pageId", mPageId);
 
@@ -663,7 +674,8 @@ public class PaperChainsActivity extends DecoderActivity {
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				try {
 					if ("ok".equals(response.getString("status"))) {
-						AudioAreaHolder holder = new AudioAreaHolder(trackId, new Rect(left, top, right, bottom));
+						AudioAreaHolder holder = new AudioAreaHolder(trackId, new Rect(leftmost, topmost, rightmost,
+								bottommost));
 						holder.setImageRect(new Rect(audioRect));
 						mAudioAreas.add(holder);
 						mImageView.addAudioAreaRect(holder.imageRect);

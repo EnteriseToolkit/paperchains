@@ -31,7 +31,7 @@ dependencies {
     compile project(':..:dualqrscanner:app')
     compile files('libs/java-api-wrapper-1.0.1-SNAPSHOT.jar') // TODO: using old version for upload as new one fails...
 
-    compile 'com.android.support:appcompat-v7:21.0.0'
+    compile 'com.android.support:appcompat-v7:21.0.2'
     compile 'com.googlecode.mp4parser:isoparser:1.0.2'
     compile 'com.loopj.android:android-async-http:1.4.6'
     compile 'com.nineoldandroids:library:2.4.0'
