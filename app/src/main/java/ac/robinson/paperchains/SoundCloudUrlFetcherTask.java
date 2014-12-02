@@ -40,7 +40,7 @@ class SoundCloudUrlFetcherTask extends AsyncTask<Long, Void, String> {
 	private int errorReason = -1;
 
 	public SoundCloudUrlFetcherTask(PaperChainsActivity context, ApiWrapper wrapper) {
-		mContext = new WeakReference<PaperChainsActivity>(context);
+		mContext = new WeakReference<>(context);
 		mWrapper = wrapper;
 	}
 

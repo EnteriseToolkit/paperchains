@@ -61,7 +61,7 @@ class SoundCloudUploadTask extends AsyncTask<String, Long, JSONObject> {
 	private final Rect mAudioRect;
 
 	public SoundCloudUploadTask(PaperChainsActivity context, ApiWrapper wrapper, Token accessToken, String pageId, Rect audioRect) {
-		mContext = new WeakReference<PaperChainsActivity>(context);
+		mContext = new WeakReference<>(context);
 
 		// set up upload parameters
 		mApiWrapper = wrapper;
@@ -196,8 +196,11 @@ class SoundCloudUploadTask extends AsyncTask<String, Long, JSONObject> {
 		// otherwise, load from assets
 		try {
 			InputStream inputStream = context.getAssets().open("paperchains.png");
+			// suppressed as it requires API level 19
+			//noinspection TryFinallyCanBeTryWithResources
 			try {
 				FileOutputStream outputStream = new FileOutputStream(cacheFile);
+				//noinspection TryFinallyCanBeTryWithResources
 				try {
 					byte[] buf = new byte[1024];
 					int len;

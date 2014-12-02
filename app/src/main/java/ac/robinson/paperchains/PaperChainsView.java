@@ -47,7 +47,7 @@ public class PaperChainsView extends View implements Observer {
 
 	private Bitmap mBitmap;
 
-	private final ArrayList<Rect> mAudioAreas = new ArrayList<Rect>();
+	private final ArrayList<Rect> mAudioAreas = new ArrayList<>();
 	private final Path mScribblePath = new Path();
 
 	private DragCallback mDragCallback = null;

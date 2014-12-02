@@ -99,7 +99,7 @@ public class PaperChainsActivity extends DecoderActivity {
 
 	private ImageParameters mImageParameters;
 
-	private final ArrayList<AudioAreaHolder> mAudioAreas = new ArrayList<AudioAreaHolder>();
+	private final ArrayList<AudioAreaHolder> mAudioAreas = new ArrayList<>();
 	private MediaPlayer mAudioPlayer;
 	private AudioRecorder mAudioRecorder;
 	private Rect mCurrentAudioRect;
@@ -503,10 +503,7 @@ public class PaperChainsActivity extends DecoderActivity {
 						Toast.LENGTH_SHORT).show();
 			}
 
-		} catch (IOException e) {
-			Toast.makeText(PaperChainsActivity.this, getString(R.string.audio_recording_setup_error),
-					Toast.LENGTH_SHORT).show();
-		} catch (IllegalArgumentException e) {
+		} catch (IOException | IllegalArgumentException e) {
 			Toast.makeText(PaperChainsActivity.this, getString(R.string.audio_recording_setup_error),
 					Toast.LENGTH_SHORT).show();
 		}

@@ -45,7 +45,7 @@ public class LongPressZoomListener implements View.OnTouchListener {
 	 * Enum defining listener modes. Before the view is touched the listener is in the UNDEFINED mode. Once touch
 	 * starts
 	 * it can enter either one of the other two modes: If the user scrolls over the view the listener will enter PAN
-	 * mode, if the user lets his finger rest and makes a longpress the listener will enter ZOOM mode.
+	 * mode, if the user lets his finger rest and makes a long press the listener will enter ZOOM mode.
 	 */
 	private enum Mode {
 		UNDEFINED, PAN, ZOOM, SCALE
@@ -114,7 +114,7 @@ public class LongPressZoomListener implements View.OnTouchListener {
 	 */
 	private float mPreviousScaleSpan = 0;
 
-	private ScaleGestureDetector mScaleDetector;
+	private final ScaleGestureDetector mScaleDetector;
 
 	/**
 	 * Creates a new instance
