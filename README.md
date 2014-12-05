@@ -3,6 +3,8 @@ PaperChains
 
 An Android app for adding audio to printed documents. Use the [CodeMaker](https://github.com/EnteriseToolkit/codemaker) to generate a document, then take a photo of it with PaperChains to add audio or browse other people's narrations.
 
+Also [available on Google Play](https://play.google.com/store/apps/details?id=ac.robinson.paperchains).
+
 ![PaperChains](http://www.enterise.info/paperchains/github.jpg)
 
 
