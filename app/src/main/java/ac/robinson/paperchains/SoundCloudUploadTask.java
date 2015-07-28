@@ -60,7 +60,8 @@ class SoundCloudUploadTask extends AsyncTask<String, Long, JSONObject> {
 	private final String mPageId;
 	private final Rect mAudioRect;
 
-	public SoundCloudUploadTask(PaperChainsActivity context, ApiWrapper wrapper, Token accessToken, String pageId, Rect audioRect) {
+	public SoundCloudUploadTask(PaperChainsActivity context, ApiWrapper wrapper, Token accessToken, String pageId,
+	                            Rect audioRect) {
 		mContext = new WeakReference<>(context);
 
 		// set up upload parameters

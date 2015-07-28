@@ -21,7 +21,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 
 import ac.robinson.dualqrscanner.camera.CameraUtilities;
 
-public class SoundCloudLoginActivity extends ActionBarActivity {
+public class SoundCloudLoginActivity extends AppCompatActivity {
 
 	public static final String ACCESS_TOKEN_RESULT = "access_token_result";
 
@@ -52,8 +52,10 @@ public class SoundCloudLoginActivity extends ActionBarActivity {
 
 		// set up action bar
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setTitle(R.string.title_activity_soundcloud_login);
-		actionBar.setDisplayShowTitleEnabled(true);
+		if (actionBar != null) {
+			actionBar.setTitle(R.string.title_activity_soundcloud_login);
+			actionBar.setDisplayShowTitleEnabled(true);
+		}
 
 		// load soundcloud API login page
 		WebView webView = (WebView) findViewById(R.id.web_view);

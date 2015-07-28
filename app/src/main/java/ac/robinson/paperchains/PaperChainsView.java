@@ -77,11 +77,11 @@ public class PaperChainsView extends View implements Observer {
 	private boolean mCanClick;
 
 	public interface DragCallback {
-		public void dragStarted();
+		void dragStarted();
 	}
 
 	public interface ScribbleCallback {
-		public void scribbleCompleted(Path scribble);
+		void scribbleCompleted(Path scribble);
 	}
 
 	public PaperChainsView(Context context, AttributeSet attrs) {

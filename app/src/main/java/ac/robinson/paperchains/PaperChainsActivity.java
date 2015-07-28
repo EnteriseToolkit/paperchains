@@ -152,8 +152,10 @@ public class PaperChainsActivity extends DecoderActivity {
 
 		// set up action bar
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setTitle(R.string.title_activity_capture);
-		actionBar.setDisplayShowTitleEnabled(true);
+		if (actionBar != null) {
+			actionBar.setTitle(R.string.title_activity_capture);
+			actionBar.setDisplayShowTitleEnabled(true);
+		}
 
 		int resultPointColour = getResources().getColor(R.color.accent);
 		((ViewfinderView) findViewById(R.id.viewfinder_view)).setResultPointColour(resultPointColour);
@@ -293,9 +295,9 @@ public class PaperChainsActivity extends DecoderActivity {
 						if (areas != null && !areas.isNull(0)) {
 							for (int i = 0; i < areas.length(); i++) {
 								JSONObject jsonBox = areas.getJSONObject(i);
-								mAudioAreas.add(new AudioAreaHolder(jsonBox.getLong("soundCloudId"),
-										new Rect(jsonBox.getInt("left"), jsonBox.getInt("top"),
-												jsonBox.getInt("right"), jsonBox.getInt("bottom"))));
+								mAudioAreas.add(new AudioAreaHolder(jsonBox.getLong("soundCloudId"), new Rect(jsonBox
+										.getInt("left"), jsonBox.getInt("top"), jsonBox.getInt("right"), jsonBox
+										.getInt("bottom"))));
 							}
 						}
 
@@ -328,8 +330,8 @@ public class PaperChainsActivity extends DecoderActivity {
 	}
 
 	@Override
-	protected void onPictureCompleted(Bitmap parsedBitmap, ImageParameters imageParameters,
-	                                  CodeParameters codeParameters) {
+	protected void onPictureCompleted(Bitmap parsedBitmap, ImageParameters imageParameters, CodeParameters
+			codeParameters) {
 		// Toast.makeText(TicQRActivity.this, "Picture completed", Toast.LENGTH_SHORT).show();
 
 		mImageView.setImage(parsedBitmap);
@@ -353,10 +355,13 @@ public class PaperChainsActivity extends DecoderActivity {
 
 	private void switchMode(int newMode) {
 		// TODO: check we're not recording/saving audio before doing this? (currently we allow it somewhat hackily)
+		ActionBar actionBar = getSupportActionBar();
 		switch (newMode) {
 			case MODE_ADD:
 				resetAudioPlayer();
-				getSupportActionBar().setTitle(getString(R.string.title_activity_add));
+				if (actionBar != null) {
+					actionBar.setTitle(getString(R.string.title_activity_add));
+				}
 				mZoomListener.setPanZoomEnabled(false);
 				mImageView.setScribbleEnabled(true);
 				mImageView.setClickable(true);
@@ -367,7 +372,9 @@ public class PaperChainsActivity extends DecoderActivity {
 
 			case MODE_LISTEN:
 				resetRecordingInterface(); // first as it also sets the the activity title
-				getSupportActionBar().setTitle(getString(R.string.title_activity_explore));
+				if (actionBar != null) {
+					actionBar.setTitle(getString(R.string.title_activity_explore));
+				}
 				mZoomListener.setPanZoomEnabled(true);
 				mImageView.setScribbleEnabled(false);
 				mImageView.setClickable(true);
@@ -387,7 +394,9 @@ public class PaperChainsActivity extends DecoderActivity {
 
 				resetAudioPlayer(); // TODO: fix odd intermittent rotation issue with the play button after rescanning
 				resetRecordingInterface(); // first as it also sets the the activity title
-				getSupportActionBar().setTitle(R.string.title_activity_capture);
+				if (actionBar != null) {
+					actionBar.setTitle(R.string.title_activity_capture);
+				}
 				mZoomListener.setPanZoomEnabled(true);
 				mImageView.setScribbleEnabled(false);
 				mImageView.setClickable(false);
@@ -400,7 +409,9 @@ public class PaperChainsActivity extends DecoderActivity {
 
 			case MODE_IMAGE_ONLY:
 				// allow image exploration, but no listening
-				getSupportActionBar().setTitle(getString(R.string.title_activity_image_only));
+				if (actionBar != null) {
+					actionBar.setTitle(getString(R.string.title_activity_image_only));
+				}
 				mZoomListener.setPanZoomEnabled(true);
 				mCurrentMode = MODE_IMAGE_ONLY;
 				supportInvalidateOptionsMenu();
@@ -415,8 +426,8 @@ public class PaperChainsActivity extends DecoderActivity {
 			Rect rect = holder.serverRect;
 			PointF leftTop = QRImageParser.getImagePosition(mImageParameters, new PointF(rect.left, rect.top));
 			PointF rightBottom = QRImageParser.getImagePosition(mImageParameters, new PointF(rect.right, rect.bottom));
-			RectF displayRect = new RectF(Math.min(leftTop.x, rightBottom.x), Math.min(leftTop.y, rightBottom.y),
-					Math.max(rightBottom.x, leftTop.x), Math.max(leftTop.y, rightBottom.y));
+			RectF displayRect = new RectF(Math.min(leftTop.x, rightBottom.x), Math.min(leftTop.y, rightBottom.y), Math
+					.max(rightBottom.x, leftTop.x), Math.max(leftTop.y, rightBottom.y));
 			Rect imageRect = new Rect();
 			displayRect.roundOut(imageRect);
 
@@ -495,17 +506,17 @@ public class PaperChainsActivity extends DecoderActivity {
 				mImageView.setScribbleEnabled(false);
 
 				// position the recording buttons
-				PointF centrePoint = mImageView.imagePointToScreenPoint(new Point(audioArea.centerX(),
-						audioArea.centerY()));
+				PointF centrePoint = mImageView.imagePointToScreenPoint(new Point(audioArea.centerX(), audioArea
+						.centerY()));
 				initialiseRecordingButtons(centrePoint);
 			} else {
-				Toast.makeText(PaperChainsActivity.this, getString(R.string.audio_recording_setup_error),
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(PaperChainsActivity.this, getString(R.string.audio_recording_setup_error), Toast
+						.LENGTH_SHORT).show();
 			}
 
 		} catch (IOException | IllegalArgumentException e) {
-			Toast.makeText(PaperChainsActivity.this, getString(R.string.audio_recording_setup_error),
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(PaperChainsActivity.this, getString(R.string.audio_recording_setup_error), Toast
+					.LENGTH_SHORT).show();
 		}
 	}
 
@@ -551,12 +562,12 @@ public class PaperChainsActivity extends DecoderActivity {
 						}
 					});
 				} else {
-					Toast.makeText(PaperChainsActivity.this, getString(R.string.audio_recording_setup_error),
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(PaperChainsActivity.this, getString(R.string.audio_recording_setup_error), Toast
+							.LENGTH_SHORT).show();
 				}
 			} else {
-				Toast.makeText(PaperChainsActivity.this, getString(R.string.audio_recording_setup_error),
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(PaperChainsActivity.this, getString(R.string.audio_recording_setup_error), Toast
+						.LENGTH_SHORT).show();
 			}
 		}
 	};
@@ -696,9 +707,9 @@ public class PaperChainsActivity extends DecoderActivity {
 	}
 
 	private void initialisePlaybackButton(PointF centrePoint) {
-		mPlayButton.setLayoutParams(getLayoutParamsForButtonPosition(centrePoint, mPlayButton.getWidth(),
-				mPlayButton.getHeight(), mImageView.getLeft(), mImageView.getTop(), mImageView.getRight(),
-				mImageView.getBottom()));
+		mPlayButton.setLayoutParams(getLayoutParamsForButtonPosition(centrePoint, mPlayButton.getWidth(), mPlayButton
+				.getHeight(), mImageView.getLeft(), mImageView.getTop(), mImageView.getRight(), mImageView.getBottom
+				()));
 		mPlayButton.setImageResource(R.drawable.ic_pause_white_24dp); // we know there is audio at this location
 		mPlayButton.setVisibility(View.VISIBLE);
 	}
@@ -713,8 +724,8 @@ public class PaperChainsActivity extends DecoderActivity {
 		mRecordButton.setVisibility(View.VISIBLE);
 
 		// position the control buttons in anticipation of recording completion
-		RelativeLayout.LayoutParams controlLayoutParams = getLayoutParamsForButtonPosition(centrePoint,
-				mPlayButton.getWidth(), mPlayButton.getHeight(), parentLeft, parentTop, parentRight, parentBottom);
+		RelativeLayout.LayoutParams controlLayoutParams = getLayoutParamsForButtonPosition(centrePoint, mPlayButton
+				.getWidth(), mPlayButton.getHeight(), parentLeft, parentTop, parentRight, parentBottom);
 		mPlayButton.setLayoutParams(controlLayoutParams);
 		mDeleteButton.setLayoutParams(controlLayoutParams);
 		mSaveButton.setLayoutParams(controlLayoutParams);
@@ -723,13 +734,14 @@ public class PaperChainsActivity extends DecoderActivity {
 		mDeleteButton.setVisibility(View.INVISIBLE);
 		mSaveButton.setVisibility(View.INVISIBLE);
 
-		getSupportActionBar().setTitle(getString(R.string.title_activity_record));
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setTitle(getString(R.string.title_activity_record));
+		}
 	}
 
-	private RelativeLayout.LayoutParams getLayoutParamsForButtonPosition(PointF buttonPosition, int buttonWidth,
-	                                                                     int buttonHeight, int parentLeft,
-	                                                                     int parentTop, int parentRight,
-	                                                                     int parentBottom) {
+	private RelativeLayout.LayoutParams getLayoutParamsForButtonPosition(PointF buttonPosition, int buttonWidth, int
+			buttonHeight, int parentLeft, int parentTop, int parentRight, int parentBottom) {
 		RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(buttonWidth, buttonHeight);
 		layoutParams.leftMargin = parentLeft + Math.round(buttonPosition.x - (buttonWidth / 2f));
 		layoutParams.topMargin = parentTop + Math.round(buttonPosition.y - (buttonHeight / 2f));
@@ -782,10 +794,10 @@ public class PaperChainsActivity extends DecoderActivity {
 				}
 
 				buttonAnimator.playTogether(ObjectAnimator.ofFloat(mDeleteButton, "translationX", 0, leftX),
-						ObjectAnimator.ofFloat(mDeleteButton, "translationY", 0, leftY),
-						ObjectAnimator.ofFloat(mSaveButton, "translationX", 0, rightX),
-						ObjectAnimator.ofFloat(mSaveButton, "translationY", 0, rightY),
-						ObjectAnimator.ofFloat(mPlayButton, "translationY", 0, buttonOffset));
+						ObjectAnimator.ofFloat(mDeleteButton, "translationY", 0, leftY), ObjectAnimator.ofFloat
+								(mSaveButton, "translationX", 0, rightX), ObjectAnimator.ofFloat(mSaveButton,
+								"translationY", 0, rightY), ObjectAnimator.ofFloat(mPlayButton, "translationY", 0,
+								buttonOffset));
 				buttonAnimator.setInterpolator(new OvershootInterpolator());
 				break;
 			case -1: // in
@@ -801,10 +813,10 @@ public class PaperChainsActivity extends DecoderActivity {
 				}
 
 				buttonAnimator.playTogether(ObjectAnimator.ofFloat(mDeleteButton, "translationX", leftX, 0),
-						ObjectAnimator.ofFloat(mDeleteButton, "translationY", leftY, 0),
-						ObjectAnimator.ofFloat(mSaveButton, "translationX", rightX, 0),
-						ObjectAnimator.ofFloat(mSaveButton, "translationY", rightY, 0),
-						ObjectAnimator.ofFloat(mPlayButton, "translationY", buttonOffset, 0));
+						ObjectAnimator.ofFloat(mDeleteButton, "translationY", leftY, 0), ObjectAnimator.ofFloat
+								(mSaveButton, "translationX", rightX, 0), ObjectAnimator.ofFloat(mSaveButton,
+								"translationY", rightY, 0), ObjectAnimator.ofFloat(mPlayButton, "translationY",
+								buttonOffset, 0));
 				buttonAnimator.setInterpolator(new AnticipateInterpolator());
 				break;
 		}
@@ -843,7 +855,10 @@ public class PaperChainsActivity extends DecoderActivity {
 		mSaveButton.setClickable(true);
 
 		mImageView.setScribbleEnabled(true);
-		getSupportActionBar().setTitle(getString(R.string.title_activity_add));
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setTitle(getString(R.string.title_activity_add));
+		}
 	}
 
 	public void streamAudioLoadCompleted(String url) {
