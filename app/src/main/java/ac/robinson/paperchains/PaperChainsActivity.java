@@ -56,7 +56,6 @@ import com.sonyericsson.zoom.LongPressZoomListener;
 import com.soundcloud.api.Env;
 import com.soundcloud.api.Token;
 
-import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,6 +73,7 @@ import ac.robinson.dualqrscanner.ImageParameters;
 import ac.robinson.dualqrscanner.QRImageParser;
 import ac.robinson.dualqrscanner.ViewfinderView;
 import ac.robinson.dualqrscanner.camera.CameraUtilities;
+import cz.msebera.android.httpclient.Header;
 
 public class PaperChainsActivity extends DecoderActivity {
 

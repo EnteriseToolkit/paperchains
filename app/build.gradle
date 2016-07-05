@@ -1,16 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion '22.0.1'
-
+    compileSdkVersion 24
+    buildToolsVersion '24'
     defaultConfig {
         applicationId 'ac.robinson.paperchains'
         minSdkVersion 8
-        targetSdkVersion 22
-        versionCode 3
+        targetSdkVersion 24
+        versionCode 4
         versionName '1.0'
-        resConfigs "en"
+        resConfigs 'en'
     }
 
     compileOptions {
@@ -29,20 +28,24 @@ android {
 
     buildTypes {
         release {
-            shrinkResources true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+
+            shrinkResources true
         }
     }
+
+    useLibrary 'org.apache.http.legacy' // TODO: specific (older) version required for SoundCloud
 }
 
 dependencies {
-    compile project(':..:dualqrscanner:app')
+    compile project(':dualqrscanner')
+
     compile files('libs/java-api-wrapper-1.0.1-SNAPSHOT.jar') // TODO: using old version for upload as new one fails...
 
-    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.googlecode.mp4parser:isoparser:1.0.2'
-    compile 'com.loopj.android:android-async-http:1.4.6'
+    compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'com.nineoldandroids:library:2.4.0'
     compile('org.apache.httpcomponents:httpmime:4.0.3') { // TODO: specific (older) version required for SoundCloud
         exclude module: 'commons-logging'

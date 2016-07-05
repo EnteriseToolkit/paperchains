@@ -6,7 +6,7 @@
 .DS_Store
 /build
 
-/versions
+/releases
 
 # you will need to provide your own SoundCloud client id and secret
 app/src/main/res/values/soundcloud.xml
